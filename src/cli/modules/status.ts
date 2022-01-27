@@ -51,12 +51,15 @@ function findIndex(name: string, list: FactoryComplexProduction[]): number {
   return 0;
 }
 
-export async function printStatus(name?: string): Promise<number> {
+export async function printStatus(name?: string, itt?: boolean): Promise<number> {
   const res = calculateWorld();
 
   console.clear();
   let index = findIndex(name ?? '', res);
   printComplex(res[index]);
+
+  if (!itt) { return 0 }
+
   printKeys(index, res.length);
   const keys = ['j', 'k'];
 
