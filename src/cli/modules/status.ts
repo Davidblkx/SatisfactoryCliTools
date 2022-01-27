@@ -24,6 +24,7 @@ function printComplex(factory: FactoryComplexProduction): void {
   }
   console.log(color('blue', '----') + back('blue', ' Total '));
   for (const [key, value] of Object.entries(factory.prod)) {
+    if (value === 0) continue;
     const txtValue = value >= 0 ? color('green', `+${value}`) : color('red', value.toString());
     const name = ResourceMap[key as ResourceKey].name;
     console.log(color('yellow', `  ${name}: `) + txtValue);
