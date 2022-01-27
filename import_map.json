@@ -1,5 +1,6 @@
 {
   "imports": {
-    "deno/": "https://deno.land/std@0.122.0/"
+    "deno/": "https://deno.land/std@0.122.0/",
+    "keypress": "https://deno.land/x/keypress@0.0.7/mod.ts"
   }
 }

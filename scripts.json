@@ -12,9 +12,9 @@
       "unstable": false
     },
     "serve": {
-      "cmd": "deno run --import-map ./import_map.json -A ./src/cli.ts status",
+      "cmd": "deno run --import-map ./import_map.json -A ./src/cli.ts status \"Advance Iron\"",
       "desc": "Run server",
-      "unstable": false,
+      "unstable": true,
       "watch": true
     }
   },

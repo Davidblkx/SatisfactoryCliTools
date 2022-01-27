@@ -1,59 +1,89 @@
+import { readKeypress } from 'keypress';
+
+import { FactoryComplexProduction } from '../../app/calculation/__.ts';
 import {
-  calcFactoryComplexPower,
-  calcFactoryComplexProduction,
-} from '../../app/calculation/__.ts';
-import {
-  FactoryComplex,
-  ResourceAmount,
   ResourceKey,
   ResourceMap,
 } from '../../app/data/__.ts';
-import { worldFactories } from '../../app/factories/__.ts';
-import { color } from '../color.ts';
+import {
+  back,
+  color,
+} from '../color.ts';
+import { calculateWorld } from './calculate.ts';
 
-export interface CalculationResult {
-  resources: ResourceAmount;
-  power: number;
-}
-
-function calculateComplexStatus(): CalculationResult {
-  const complexList: FactoryComplex[] = worldFactories;
-  const res: CalculationResult = {
-    resources: {},
-    power: 0,
-  };
-
-  for (const complex of complexList) {
-    const complexRes = calcFactoryComplexProduction(complex);
-    const resources = Object.keys(complexRes) as ResourceKey[];
-    for (const key of resources)
-      res.resources[key] = (res.resources[key] ?? 0) + (complexRes[key] ?? 0);
-
-    res.power += calcFactoryComplexPower(complex);
+function printComplex(factory: FactoryComplexProduction): void {
+  const txtPower = factory.power >= 0 ? color('green', `+${factory.power}`) : color('red', factory.power.toString());
+  console.log(back('magenta', ` ${factory.name} `) + color('cyan', ' [') + txtPower + color('cyan', ']'));
+  for (const f of factory.factories) {
+    console.log(color('cyan', `----${f.name} `));
+    for (const [key, value] of Object.entries(f.prod)) {
+      const txtValue = value >= 0 ? color('green', `+${value}`) : color('red', value.toString());
+      const name = ResourceMap[key as ResourceKey].name;
+      console.log(color('yellow', `  ${name}: `) + txtValue);
+    }
+  }
+  console.log(color('blue', '----') + back('blue', ' Total '));
+  for (const [key, value] of Object.entries(factory.prod)) {
+    const txtValue = value >= 0 ? color('green', `+${value}`) : color('red', value.toString());
+    const name = ResourceMap[key as ResourceKey].name;
+    console.log(color('yellow', `  ${name}: `) + txtValue);
   }
 
-  res.power += res.resources.power ?? 0;
-  delete res.resources.power;
-
-  return res;
+  console.log('\n\r');
 }
 
-export function printStatus(): number {
+function printKeys(index: number, max: number): void {
+  if (index > 0) {
+    console.log('Press ' + color('yellow', 'j') + ' to go back');
+  }
+
+  if (index < max - 1) {
+    console.log('Press ' + color('yellow', 'k') + ' to go forward');
+  }
+}
+
+function findIndex(name: string, list: FactoryComplexProduction[]): number {
+  for (let i = 0; i < list.length; i++) {
+    if (list[i].name === name) {
+      return i;
+    }
+  }
+  return 0;
+}
+
+export async function printStatus(name?: string): Promise<number> {
+  const res = calculateWorld();
+
   console.clear();
-  const res = calculateComplexStatus();
-  const resourcesKeys = Object.keys(res.resources) as ResourceKey[];
+  let index = findIndex(name ?? '', res);
+  printComplex(res[index]);
+  printKeys(index, res.length);
+  const keys = ['j', 'k'];
 
-  console.log(color('blue', 'Resources:'));
-  for (const key of resourcesKeys) {
-    const amount = res.resources[key] ?? 0;
-    const txtAmount = amount >= 0 ? color('green', `${amount}`) : color('red', `${amount}`);
+  for await (const keypress of readKeypress()) {
+    if (keypress.ctrlKey && keypress.key === 'c') {
+        Deno.exit(0);
+    }
 
-    const name = ResourceMap[key].name;
-    console.log(`  ${color('yellow', name)}: ${txtAmount}`);
+    if (keys.includes(keypress.key || '')) {
+
+      switch (keypress.key) {
+        case 'j':
+          index--;
+          break;
+        case 'k':
+          index++;
+          break;
+      }
+
+      if (index < 0) index = 0;
+      if (index > res.length - 1) index = res.length - 1;
+
+      console.clear();
+      printComplex(res[index]);
+      printKeys(index, res.length);
+    }
   }
-
-  const txtPower = res.power >= 0 ? color('green', `${res.power}`) : color('red', `${res.power}`);
-  console.log(color('blue', 'Power: ') + txtPower);
 
   return 0;
 }
