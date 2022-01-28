@@ -29,6 +29,7 @@ export const recipesMap = {
   quartzNormalMk2: newRecipe('Quartz Mk2', 'miner_mk2', [], [['rawQuartz', 120]]),
   quartzCrystal: newRecipe('Quartz Crystal', 'constructor', [['rawQuartz', 37.5]], [['quartzCrystal', 22.5]]),
   silica: newRecipe('Silica', 'constructor', [['rawQuartz', 22.5]], [['silica', 37.5]]),
+  modularFrame: newRecipe('Modular Frame', 'assembler', [['reinforced_plate', 3], ['iron_rod', 12]], [['modularFrame', 2]]),
 }
 
 export type RecipeKey = keyof typeof recipesMap;

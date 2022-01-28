@@ -16,10 +16,10 @@ export const advanceIron: FactoryComplex = {
       map: { ironIngot: 4 },
     },
     {
-      name: 'Screws 1',
+      name: 'Screws 4 you',
       map: {
         ironRod: 4,
-        screws: 6,
+        screws: 5,
       },
     },
     {
@@ -28,6 +28,19 @@ export const advanceIron: FactoryComplex = {
         ironRod: 4,
         rotor: 2,
       },
+    },
+    {
+      name: 'Strong Plates',
+      map: {
+        ironPlate: 3,
+        ironRod: 2,
+        screws: 3,
+        reinforcedPlate: 2,
+      }
+    },
+    {
+      name: 'Frames Mods',
+      map: { modularFrame: 2 }
     }
   ]
 };

@@ -23,6 +23,7 @@ export const ResourceMap = {
   rawQuartz: newRes('Raw Quartz', 'solid'),
   quartzCrystal: newRes('Quartz Crystal', 'solid'),
   silica: newRes('Silica', 'solid'),
+  modularFrame: newRes('Modular Frame', 'solid'),
 }
 
 export type ResourceKey = keyof typeof ResourceMap;
