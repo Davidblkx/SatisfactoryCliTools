@@ -30,6 +30,14 @@ export const recipesMap = {
   quartzCrystal: newRecipe('Quartz Crystal', 'constructor', [['rawQuartz', 37.5]], [['quartzCrystal', 22.5]]),
   silica: newRecipe('Silica', 'constructor', [['rawQuartz', 22.5]], [['silica', 37.5]]),
   modularFrame: newRecipe('Modular Frame', 'assembler', [['reinforced_plate', 3], ['iron_rod', 12]], [['modularFrame', 2]]),
+  copperOreNormalMk2: newRecipe('Copper Ore', 'miner_mk2', [], [['copper_ore', 120]]),
+  heavyModularFrame: newRecipe('Heavy Modular Frame', 'manufacterer', [['modularFrame', 10], ['steel_pipe', 30], ['screws', 200], ['encased_industrial_beam', 10]], [['heavy_modular_frame', 2]]),
+  steelPipe: newRecipe('Steel Pipe', 'constructor', [['steel_ingot', 30]], [['steel_pipe', 20]]),
+  steelIngot: newRecipe('Steel Ingot', 'foundry', [['iron_ore', 45], ['coal', 45]], [['steel_ingot', 45]]),
+  concrete: newRecipe('Concrete', 'constructor', [['stone', 45]], [['concrete', 15]]),
+  steelBeam: newRecipe('Steel Beam', 'constructor', [['steel_ingot', 60]], [['steel_beam', 15]]),
+  encasedIndustrialBeam: newRecipe('Encased Industrial Beam', 'constructor', [['steel_beam', 24], ['concrete', 30]], [['encased_industrial_beam', 6]]),
+  encasedIndustrialPipe: newRecipe('Encased Industrial Beam', 'constructor', [['steel_pipe', 28], ['concrete', 20]], [['encased_industrial_beam', 4]]),
 }
 
 export type RecipeKey = keyof typeof recipesMap;

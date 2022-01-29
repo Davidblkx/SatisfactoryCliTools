@@ -18,6 +18,8 @@ export const machineMap = {
   smelter: newMach('Smelter', 4, ['solid'], ['solid']),
   constructor: newMach('Constructor', 4, ['solid'], ['solid']),
   assembler: newMach('Assembler', 15, ['solid', 'solid'], ['solid']),
+  manufacterer: newMach('Manufacterer', 55, ['solid', 'solid', 'solid', 'solid'], ['solid']),
+  foundry: newMach('Foundry', 16, ['solid', 'solid'], ['solid']),
 }
 
 export type MachineKey = keyof typeof machineMap;

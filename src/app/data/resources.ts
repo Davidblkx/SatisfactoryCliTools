@@ -24,6 +24,14 @@ export const ResourceMap = {
   quartzCrystal: newRes('Quartz Crystal', 'solid'),
   silica: newRes('Silica', 'solid'),
   modularFrame: newRes('Modular Frame', 'solid'),
+  copper_ore: newRes('Copper Ore', 'solid'),
+  heavy_modular_frame: newRes('Heavy Modular Frame', 'solid'),
+  encased_industrial_beam: newRes('Encased Industrial Beam', 'solid'),
+  steel_pipe: newRes('Steel Pipe', 'solid'),
+  steel_ingot: newRes('Steel Ingot', 'solid'),
+  steel_beam: newRes('Steel Beam', 'solid'),
+  concrete: newRes('Concrete', 'solid'),
+  stone: newRes('Stone', 'solid'),
 }
 
 export type ResourceKey = keyof typeof ResourceMap;

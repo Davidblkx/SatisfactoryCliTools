@@ -27,7 +27,7 @@ export const StatusCommand: CliCommand = {
   options: [inttOption],
   description: 'Show factories production status',
   action: async (args, opt) => {
-    const name = args[0] ?? '';
+    const name = args[0] ?? 'Heavy Mod';
     const ittMode = getOptionValue(opt, inttOption, false);
     return await printStatus(name.toString(), ittMode);
   }
